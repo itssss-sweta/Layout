@@ -136,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     color: containerData.color,
                     child: Center(
                       child: Text(
@@ -165,7 +165,9 @@ class _MyHomePageState extends State<MyHomePage> {
               }
             }
           }),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        selectedIndex: 0,
+      ),
     );
   }
 }

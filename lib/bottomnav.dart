@@ -1,12 +1,13 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:doggo_project/home.dart';
+import 'package:doggo_project/search.dart';
 import 'package:flutter/material.dart';
-//import 'package:project1/search.dart';
-//import 'home.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
-  const BottomNavigationBarWidget({super.key});
+  final int selectedIndex;
+  const BottomNavigationBarWidget({Key? key, required this.selectedIndex})
+      : super(key: key);
 
   @override
   _BottomNavigationBarWidgetState createState() =>
@@ -14,35 +15,41 @@ class BottomNavigationBarWidget extends StatefulWidget {
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
-  final int _currentIndex = 0;
+  int _currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.selectedIndex;
+  }
+
   void onTabTapped(int index) {
-    // if (index == 0) {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => MyHomePage()),
-    //   );
-    // }
-    // else if (index == 1) {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => const SearchBar()),
-    //   );
-    // }
-    // else {
-    //   setState(() {
-    //     _currentIndex = index;
-    //   });
-    // }
+    if (index == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const MyHomePage()),
+      );
+    } else if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SearchBox()),
+      );
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    const iconColor = Colors.grey;
+    const selectedIconColor = Colors.white;
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       onTap: onTabTapped,
       currentIndex: _currentIndex,
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.grey,
+      selectedItemColor: selectedIconColor,
+      unselectedItemColor: iconColor,
       selectedFontSize: 13,
       unselectedFontSize: 13,
       iconSize: 30,
